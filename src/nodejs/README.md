@@ -2,6 +2,7 @@
 
 ## Configuración inicial
 
+Crear una carpeta raiz donde se almacenara la api, luego.
 ```
 npm init --yes
 ```
@@ -13,7 +14,7 @@ Instalamos las dependencias.
 ```
 npm i express
 npm i mongoose
-npm i bcrypt
+npm i bcryptjs
 npm i dotenv
 npm i jsonwebtoken
 npm i @hapi/joi
@@ -48,7 +49,10 @@ node_modules
 Dentro del .env nuestras variables de entorno.
 
 ```
-MONGO_DB_URI=mongodb+srv://<yourusername>:<password>@cluster0.zk4db.mongodb.net/<nombrebasededatos>?retryWrites=true&w=majority
+MONGO_DB_URI=mongodb+srv://<yourusername>:<password>@cluster0.zk4db.
+mongodb.net/<nombrebasededatos>?retryWrites=true&w=majority
+
+PORT=puertoHeroku
 ```
 
 Las carpetas a crear, primero dentro de la carpeta raiz crear un src, y dentro las demas carpetas del proyecto.
@@ -68,10 +72,10 @@ require("dotenv").config();
 const app = require("./app");
 require("./database");
 
-const PORT = 5000
+const APP_PORT = process.env.PORT || 5000
 
-app.listen(PORT, () => {
-    console.log("server on port ", PORT)
+app.listen(APP_PORT, () => {
+    console.log("server on port ", APP_PORT)
 });
 ```
 
@@ -94,7 +98,51 @@ app.get("/", (req, res) => {
 
 module.exports = app;
 ```
+
+## Rutas y controladores.
+
+Dentro de la carpeta routes, creamos un archivo user.js. Este contendra las funciones que importaremos del archivo user-controllers.js.
+
+```js
+const router = require("express").Router();
+
+const userControllers = require("../controllers/user-controllers")
+
+router.post("/", userControllers.createUser)
+router.get("/", userControllers.getUsers)
+router.put("/:userId", userControllers.getUserId)
+
+
+module.exports = router;
+```
+
+user-controllers.js
+
+En el archivo user-controllers.js podemos crear las funciones, podemos comenzar con algo simple para probar las rutas en postman.
+
+```js
+const User = require("../models/User");
+
+const createUser = (req, res) => {
+    res.json({message:"post users"})
+}
+
+const getUsers = (req, res) => {
+    res.json({message:"get users"})
+}
+
+const getUserId = (req, res) => {
+    res.json({message:"Hello user"})
+}
+
+const userControllers = {createUser, getUsers, getUserId}
+module.exports = userControllers;
+```
+
+## Conectarse a la base de datos de mongoDB.
+
 database.js
+
 ```js
 const mongoose = require("mongoose");
 
@@ -113,21 +161,7 @@ const MONGO_DB_URI = process.env.MONGO_DB_URI;
 })();
 ```
 
-Dentro de la carpeta routes, creamos un archivo user.js.
-
-```js
-const router = require("express").Router();
-
-const userControllers = require("../controllers/user-controllers")
-
-router.post("/", userControllers.createUser)
-router.get("/", userControllers.getUsers)
-//router.put("/userId", userControllers.getUsers)
-
-
-
-module.exports = router;
-```
+## Creacion del modelo de la base de datos.
 
 Dentro de la carpeta models creamos un modelo en el archivo User.js.
 
@@ -145,6 +179,8 @@ const userSchema = new Schema({
 module.exports = model("User", userSchema);
 ```
 
+## Empezando a guardar usuarios mediante post en la base de datos.
+
 ```js
 const User = require("../models/User");
 
@@ -156,10 +192,10 @@ const createUser = async (req, res) => {
         lastname, 
         email
     })
-    //const userSaved = await newUser.save();
+    const userSaved = await newUser.save();
     //codigo de estado 201 "nuevo recurso se ha creado"
-    //res.status(201).json({message:"get users"})
-    res.json({message:"post users"})
+    res.status(201).json({message:"get users"})
+    
 }
 
 const getUsers = (req, res) => {
