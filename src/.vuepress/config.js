@@ -25,7 +25,10 @@ module.exports = {
     ],
     sidebar: [
       "/",
-      "/nodejs/"
+      "/nodejs/",
+      "/reducer/",
+      "/typescript&React/"
+
     ]
   },
 
