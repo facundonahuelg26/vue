@@ -27,7 +27,8 @@ module.exports = {
       "/",
       "/nodejs/",
       "/reducer/",
-      "/typescript&React/"
+      "/typescript&React/",
+      "/reactHooks/"
 
     ]
   },

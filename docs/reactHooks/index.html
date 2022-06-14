@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Que es y como usar useState. | Docs in VUE</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="description">
+    <meta name="theme-color" content="#61dafb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/vue/assets/css/0.styles.f2b6c948.css" as="style"><link rel="preload" href="/vue/assets/js/app.7eefd81f.js" as="script"><link rel="preload" href="/vue/assets/js/2.702fe10d.js" as="script"><link rel="preload" href="/vue/assets/js/12.019713b1.js" as="script"><link rel="prefetch" href="/vue/assets/js/10.0a4dce79.js"><link rel="prefetch" href="/vue/assets/js/11.f7a04528.js"><link rel="prefetch" href="/vue/assets/js/13.507ce4bb.js"><link rel="prefetch" href="/vue/assets/js/14.1e52f7ba.js"><link rel="prefetch" href="/vue/assets/js/3.2825f510.js"><link rel="prefetch" href="/vue/assets/js/4.49d819b8.js"><link rel="prefetch" href="/vue/assets/js/5.58b1a875.js"><link rel="prefetch" href="/vue/assets/js/6.36bc6efb.js"><link rel="prefetch" href="/vue/assets/js/7.ac10eb32.js"><link rel="prefetch" href="/vue/assets/js/8.76e10f9d.js"><link rel="prefetch" href="/vue/assets/js/9.8f6ac3e3.js">
+    <link rel="stylesheet" href="/vue/assets/css/0.styles.f2b6c948.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue/" class="home-link router-link-active"><!----> <span class="site-name">Docs in VUE</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue/" class="nav-link">
+  Home
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue/" class="nav-link">
+  Home
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/vue/" aria-current="page" class="sidebar-link">HOME</a></li><li><a href="/vue/nodejs/" class="sidebar-link">Levantar servidor con express + JSONWebToken</a></li><li><a href="/vue/reducer/" class="sidebar-link">Use reducer</a></li><li><a href="/vue/typescript&amp;React/" class="sidebar-link">Uso de typescript con React Js</a></li><li><a href="/vue/reactHooks/" aria-current="page" class="active sidebar-link">Que es y como usar useState.</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue/reactHooks/#¿que-es-useeffect" class="sidebar-link">¿Que es useEffect?</a></li><li class="sidebar-sub-header"><a href="/vue/reactHooks/#¿cuando-se-ejecuta-esta-funcion" class="sidebar-link">¿Cuando se ejecuta esta función?</a></li><li class="sidebar-sub-header"><a href="/vue/reactHooks/#primer-problema" class="sidebar-link">Primer problema</a></li><li class="sidebar-sub-header"><a href="/vue/reactHooks/#segundo-problema-a-considerar" class="sidebar-link">Segundo problema a considerar</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="que-es-y-como-usar-usestate"><a href="#que-es-y-como-usar-usestate" class="header-anchor">#</a> Que es y como usar useState.</h1> <p>En react si hicieramos lo siguiente...</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> value <span class="token operator">=</span> <span class="token number">0</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">handleClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    value <span class="token operator">=</span> value <span class="token operator">+</span> <span class="token number">1</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>handleClick<span class="token punctuation">}</span> <span class="token operator">&gt;</span>Click<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h2<span class="token operator">&gt;</span><span class="token punctuation">{</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Si nuestra intención fuera ver que el valor se muestre y se actualice en el DOM  no lo conseguiriamos,
+pero podriamos ver que por consola la función funciona y el valor se esta incrementando.
+En React necesitamos tener un estado para que le diga al componente que cuando el valor de ese estado cambie
+se actualice el componente o se renderice nuevamente. Esto significa que si cambia el estado hay un nuevo redibujo del DOM o renderización.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>  useState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react&quot;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>value<span class="token punctuation">,</span> setValue<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+  
+  <span class="token keyword">const</span> <span class="token function-variable function">handleClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">setValue</span><span class="token punctuation">(</span>value <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+  
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>handleClick<span class="token punctuation">}</span><span class="token operator">&gt;</span>Click<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span> 
+      <span class="token operator">&lt;</span>h2<span class="token operator">&gt;</span><span class="token punctuation">{</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> App
+</code></pre></div><p>Asi quedaria el componente si utilizamos useState, y permitiria ver los cambios en la hoja del documento.
+El useState usa en su sintaxis un array de 2 posiciones, en la posición 1 esta el valor del estado, y en
+la segunda posición tenemos una funcion que nos permite actualizar ese valor. Dentro de los parentesis
+tenemos el valor inicial de nuestro estado, que podría ser un primitivo tipo number, string, boolean, o
+también array, objeto.</p> <h1 id="concepto-de-useeffect-y-uso"><a href="#concepto-de-useeffect-y-uso" class="header-anchor">#</a> Concepto de useEffect y uso.</h1> <h2 id="¿que-es-useeffect"><a href="#¿que-es-useeffect" class="header-anchor">#</a> ¿Que es useEffect?</h2> <p>El useEffect es uno de los hooks mas usados en react, los hooks son funciones que realizan algo en concreto, en el caso de este hook, realiza efectos secundarios, por ejemplo para modificaciones manuales del DOM, para hacer llamados a una api, para ejecutar algunos eventos que son propios de javascript.</p> <h2 id="¿cuando-se-ejecuta-esta-funcion"><a href="#¿cuando-se-ejecuta-esta-funcion" class="header-anchor">#</a> ¿Cuando se ejecuta esta función?</h2> <p>El efecto se ejecuta en cada renderización o lo que es lo mismo en cada actualizacion del DOM, entonces si la estamos usando ya sabemos que por lo menos una vez se va a ejecutar.</p> <h2 id="primer-problema"><a href="#primer-problema" class="header-anchor">#</a> Primer problema</h2> <p>Si estamos usando un useEffect dentro de un componente, y ese componente realiza actualizaciones de estado, significa que se va a ejecutar el efecto por cada actualización de estado. Y esto no es un problema si quisieramos que ocurra justamente eso. Para controlar esta situacion, hay que pasarle un segundo argumento a la funcion que es un array.
+Este array puede estar vacio, en ese caso el useEffect se ejecutara una vez, un ejemplo aplicable podria ser el caso del llamado a una api, pintamos los datos que llegan y no queremos que se vuelva a ejecutar la funcion.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// ejemplo llamado a una api</span>
+<span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">getUser</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">&quot;https://jsonplaceholder.typicode.com/users&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token keyword">await</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">...</span>data<span class="token punctuation">.</span>results<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">setUser</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">...</span>data<span class="token punctuation">.</span>results<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>Si dentro del array pasaramos algun valor significa que queremos que el useEffect se ejecute en cada actualización de dicho valor.</p> <h2 id="segundo-problema-a-considerar"><a href="#segundo-problema-a-considerar" class="header-anchor">#</a> Segundo problema a considerar</h2> <p>A veces es necesario realizar un saneamiento, esto significa, limpiar los efectos del componente si este no se encuentra montado, si no hicieramos esto tendriamos un error en la aplicación, y esto puede producir que baje la performance de nuestra aplicación. El saneamiento solo se realiza a determinados efectos en particular, no todos los efectos necesitan hacer esto, pero si hicieran el saneamiento retornan una funciòn que es la encargada de limpiar dichos efectos.
+La secuencia si el componente se estuviera actualizando seria primero se ejecuta el efecto con el primer dibujo del DOM, si el DOM se redibuja, entonces se sanea el efecto anterior y se ejecuta un nuevo efecto, y asi sucesivamente, en caso de desmontarse el componente tambièn se sanea o se limpia.
+Por ejemplo si como efecto secundario quisieramos que se maneje el como se vera la aplicacion de acuerdo al tamaño del monitor.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> mediaQuery <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">matchMedia</span><span class="token punctuation">(</span><span class="token string">&quot;(min-width: 768px)&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mediaQuery<span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span>setMQuery<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// Aca se remueve el evento, porque si tuvieramos algun estado que se este actualizando y se actualice el DOM ejecutariamos de vuelta este evento.</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> mediaQuery<span class="token punctuation">.</span><span class="token function">removeListener</span><span class="token punctuation">(</span>setMQuery<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue/typescript&amp;React/" class="prev">
+        Uso de typescript con React Js
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/vue/assets/js/app.7eefd81f.js" defer></script><script src="/vue/assets/js/2.702fe10d.js" defer></script><script src="/vue/assets/js/12.019713b1.js" defer></script>
+  </body>
+</html>
